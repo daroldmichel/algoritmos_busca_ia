@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8"/>
+        <title>Sírius</title>
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    </head>
+
+    <body>
+        <center>
+            <h1> Sírius - Sistema de Rotas </h1>
+            <div class="col-md-10">
+                <p class="h2">
+                    Origem: <%= profundidade.origem %>
+                </p>
+                <p class="h2">
+                    Destino: <%= profundidade.destino %>
+                </p>
+                <br>
+                <div class="row justify-content-md-center">
+                    <div class="col-5">
+                        <p class="h3">
+                            Busca em Profundidade
+                        </p>
+                        <table class="table table-success table-striped table-bordered" name="profundidade" id="profundidade">
+                            <thead>
+                            <tr>
+                                <th scope="col">Ordem</th>
+                                <th scope="col">Destino</th>
+                                <th scope="col">Distancia</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <% for (r of profundidade.rota){%>
+                            <tr>
+                                <th scope="row"><%= r.ordem %></th>
+                                <td><%= r.cidade %></td>
+                                <td><%= r.distancia %></td>
+                            </tr>
+                            <% } %>
+                            <tr>
+                                <th scope="row">Total</th>
+                                <td></td>
+                                <td><%= profundidade.distancia_total%></td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="col-5">
+                        <p class="h3">
+                            Busca em Largura
+                        </p>
+                        <table class="table table-success table-striped table-bordered" name="largura" id="largura">
+                            <thead>
+                            <tr>
+                                <th scope="col">Ordem</th>
+                                <th scope="col">Destino</th>
+                                <th scope="col">Distancia</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <% for (r of largura.rota){%>
+                            <tr>
+                                <th scope="row"><%= r.ordem %></th>
+                                <td><%= r.cidade %></td>
+                                <td><%= r.distancia %></td>
+                            </tr>
+                            <% } %>
+                            <tr>
+                                <th scope="row">Total</th>
+                                <td></td>
+                                <td><%= largura.distancia_total%></td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+            </div>
+
+            <a href= "/" class="btn btn-primary">Realizar Nova Busca</a>
+
+        </center>
+    <script>
+        var dist_lar, dist_prof;
+        dist_lar = parseInt(`<%=largura.distancia_total%>`);
+        dist_prof = parseInt(`<%=profundidade.distancia_total%>`);
+        if(dist_lar<=dist_prof){
+            largura.classList.add('border-primary');
+        }
+        if(dist_prof<=dist_lar){
+            profundidade.classList.add('border-primary');
+        }
+    </script>
+    </body>
+</html>
